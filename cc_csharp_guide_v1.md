@@ -457,6 +457,10 @@ A process may start (PID exists) but fail internally. The command succeeding doe
 - Command: `powershell -Command "Stop-Process -Id <PID>"`
 - If you did not capture the PID at startup for any reason, do NOT attempt to kill. Ask the user to stop the app manually.
 
+**Working with multiple git repos:** Use explicit paths for each repo:
+
+- `git -C /path/to/repo status`
+
 ### 12.4 WPF Window Start Hidden to Tray
 
 To start a WPF app directly to system tray (IF REQUESTED) without window flash:
