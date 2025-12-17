@@ -20,12 +20,13 @@ This is a **live document**. Claude must update it when new principles, patterns
    1. [Project Initialization](#11-project-initialization)
    2. [Reading Instructions](#12-reading-instructions)
    3. [Checklists for Verification](#13-checklists-for-verification)
+   4. [Session Start Checklist](#14-session-start-checklist)
 2. [Build](#2-build)
    1. [Standalone Executables](#21-standalone-executables)
    2. [Common Mistakes](#22-common-mistakes)
 3. [Project Structure](#3-project-structure)
    1. [Directory Layout](#31-directory-layout)
-   2. [csproj Output Paths](#32-csproj-output-paths)
+   2. [csproj Output Paths (Optional)](#32-csproj-output-paths-optional)
    3. [.gitignore](#33-gitignore)
 4. [Architecture](#4-architecture)
 5. [UI Design Principles](#5-ui-design-principles)
@@ -104,6 +105,37 @@ Create explicit post-verification checklists for every major step.
 
 Always run through the checklist and report results before proceeding.
 
+### 1.4 Session Start Checklist
+
+After reading this guide and the project's CLAUDE.md, go through this checklist and **report results** before proceeding with any task.
+
+**Build Process:**
+
+- [ ] Use `dotnet publish` (NOT `dotnet build`)
+- [ ] Required flags: `-c Debug -r win-x64 --self-contained true -p:PublishSingleFile=true`
+- [ ] Copy exe to project root after publish
+- [ ] Start compiled .exe directly (never `dotnet run`)
+
+**Build Number (Section 10):**
+
+- [ ] BuildInfo.cs class required in all apps
+- [ ] Format: `YYYY_MM_DD__HH_mm__NNN`
+- [ ] Update build number before each publish
+- [ ] Must log at startup
+- [ ] CLI apps must support `--version`
+
+**Process Management (Section 12.3):**
+
+- [ ] Capture PID at startup
+- [ ] Verify via logs before proceeding
+- [ ] Only kill processes I started, only by PID
+
+**Behavior Rules:**
+
+- [ ] STOP on non-trivial issues and ask
+- [ ] Report errors immediately
+- [ ] Verify before proceeding
+
 ---
 
 ## 2. Build
@@ -160,7 +192,9 @@ project_name/
 └── README.md
 ```
 
-### 3.2 csproj Output Paths
+### 3.2 csproj Output Paths (Optional)
+
+**Note:** These settings are project-specific and optional. Use them when you want build artifacts in a custom location (e.g., keeping `bin/` and `obj/` out of `src/`). Skip if the project already has a working structure.
 
 ```xml
 <PropertyGroup>
@@ -437,11 +471,17 @@ var host = context.Request.Headers["X-Forwarded-Host"].FirstOrDefault()
 powershell -Command "\\$var = something; Write-Host \\$var"
 ```
 
-**Starting processes with PID capture:** Use PowerShell to start executables and capture the PID:
+**Starting processes with PID capture:** Use PowerShell to start the **compiled executable** and capture the PID:
 
 ```bash
 powershell -Command "\\$proc = Start-Process -FilePath '.\\App.exe' -PassThru; Write-Host 'PID:' \\$proc.Id"
 ```
+
+**Critical details:**
+
+- **Start the compiled .exe directly** — never use `dotnet run` because it spawns a child process with a different PID than what you capture
+- **Do NOT use `-NoNewWindow`** for interactive console apps — it attaches stdout to the calling shell, causing issues with interactive prompts (infinite output loops)
+- Build first with `dotnet build` or `dotnet publish`, then start the resulting executable
 
 **After starting, verify via logs:**
 
