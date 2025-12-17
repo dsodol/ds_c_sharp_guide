@@ -429,7 +429,35 @@ var host = context.Request.Headers["X-Forwarded-Host"].FirstOrDefault()
     ?? context.Request.Host.ToString();
 ```
 
-### 12.3 WPF Window Start Hidden to Tray
+### 12.3 Running CLI Applications
+
+**Running PowerShell from Bash:** Use double backslash to escape `$` for PowerShell variables:
+
+```bash
+powershell -Command "\\$var = something; Write-Host \\$var"
+```
+
+**Starting processes with PID capture:** Use PowerShell to start executables and capture the PID:
+
+```bash
+powershell -Command "\\$proc = Start-Process -FilePath '.\\App.exe' -PassThru; Write-Host 'PID:' \\$proc.Id"
+```
+
+**After starting, verify via logs:**
+
+1. **Logs are being written** — confirms the process is actually running and functional
+2. **No errors during startup** — look for ERROR/WARN entries that indicate initialization problems (port in use, config missing, dependency failure)
+
+A process may start (PID exists) but fail internally. The command succeeding doesn't mean the application initialized correctly. Only proceed after confirming logs show successful startup.
+
+**CRITICAL: Killing processes:**
+
+- You can ONLY kill processes you started yourself
+- You can ONLY kill by PID (use the PID captured at startup)
+- Command: `powershell -Command "Stop-Process -Id <PID>"`
+- If you did not capture the PID at startup for any reason, do NOT attempt to kill. Ask the user to stop the app manually.
+
+### 12.4 WPF Window Start Hidden to Tray
 
 To start a WPF app directly to system tray (IF REQUESTED) without window flash:
 
