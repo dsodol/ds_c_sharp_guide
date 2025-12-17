@@ -13,6 +13,7 @@ This is a **live document**. Claude must update it when new principles, patterns
 
 **Only C# specific stuff goes to this guide.**
 
+
 ## Table of Contents
 
 1. [Critical Rules](#1-critical-rules)
@@ -68,6 +69,12 @@ When you start working on any project, FIRST check if `CLAUDE.md` exists in the 
 2. **Report errors immediately.** Never ignore failed commands or tool errors.
 
 3. **Verify before proceeding.** After each major step, confirm success before moving on.
+
+Refer to C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v1.md for the C# specific requirements.
+If the user says "add to guide" add a principle (ONLY SPECIFIC TO c# DEVELOPMENT) to that guide.
+If the user says "reread the guide" reread the guide.
+
+
 ```
 
 **If CLAUDE.md exists, read it first** and follow any project-specific rules.
