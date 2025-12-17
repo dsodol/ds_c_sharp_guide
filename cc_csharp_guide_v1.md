@@ -46,6 +46,12 @@ This is a **live document**. Claude must update it when new principles, patterns
 9. [Naming](#9-naming)
 10. [Build Number Tracking](#10-build-number-tracking)
 11. [Permissions](#11-permissions)
+12. [HTTP Server and SSE](#12-http-server-and-sse)
+    1. [Server-Sent Events (SSE)](#121-server-sent-events-sse)
+    2. [Reverse Proxy Headers](#122-reverse-proxy-headers)
+    3. [Running CLI Applications](#123-running-cli-applications)
+    4. [DS.McpServer Library](#124-dsmcpserver-library)
+    5. [WPF Window Start Hidden to Tray](#125-wpf-window-start-hidden-to-tray)
 
 ---
 
@@ -72,6 +78,7 @@ When you start working on any project, FIRST check if `CLAUDE.md` exists in the 
 3. **Verify before proceeding.** After each major step, confirm success before moving on.
 
 Refer to C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v1.md for the C# specific requirements.
+**When you read this CLAUDE.md, you MUST read the guide and follow ALL session start instructions in Section 1.4.**
 If the user says "add to guide" add a principle (ONLY SPECIFIC TO c# DEVELOPMENT) to that guide.
 If the user says "reread the guide" reread the guide.
 
@@ -501,7 +508,30 @@ A process may start (PID exists) but fail internally. The command succeeding doe
 
 - `git -C /path/to/repo status`
 
-### 12.4 WPF Window Start Hidden to Tray
+### 12.4 DS.McpServer Library
+
+For building MCP (Model Context Protocol) servers that expose tools to AI assistants:
+
+**Reference:** [ds_mcp_server_manual.md](ds_mcp_server_manual.md)
+
+Quick start:
+```csharp
+using DS.McpServer;
+using DS.McpServer.Models;
+
+using var server = new GenericMcpServer(port: 43875);
+
+server.RegisterTool(
+    name: "hello",
+    description: "Says hello",
+    schema: new ToolSchema { Type = "object" },
+    handler: async (args) => new { message = "Hello!" }
+);
+
+await server.StartAsync();
+```
+
+### 12.5 WPF Window Start Hidden to Tray
 
 To start a WPF app directly to system tray (IF REQUESTED) without window flash:
 
