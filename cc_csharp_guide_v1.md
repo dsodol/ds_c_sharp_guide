@@ -389,6 +389,8 @@ YYYY_MM_DD__HH_mm__NNN
 
 Example: `2025_12_16__14_30__001`
 
+CHECK THE TIME ZONE.
+
 ### Implementation
 
 ```csharp
@@ -516,12 +518,15 @@ For building MCP (Model Context Protocol) servers that expose tools to AI assist
 
 **Reference:** [ds_mcp_server_manual.md](ds_mcp_server_manual.md)
 
+**Zero Configuration:** Default constructor works out of the box with OAuth enabled for Claude.ai.
+
 Quick start:
 ```csharp
 using DS.McpServer;
 using DS.McpServer.Models;
 
-using var server = new GenericMcpServer(port: 43875);
+// Zero config - OAuth ON, port 43875, default credentials
+using var server = new GenericMcpServer(new McpServerOptions());
 
 server.RegisterTool(
     name: "hello",
@@ -531,6 +536,12 @@ server.RegisterTool(
 );
 
 await server.StartAsync();
+```
+
+Disable OAuth:
+```csharp
+var options = new McpServerOptions { RequireAuthentication = false };
+using var server = new GenericMcpServer(options);
 ```
 
 ### 12.5 WPF Window Start Hidden to Tray
