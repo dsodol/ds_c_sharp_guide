@@ -30,6 +30,49 @@ git -C /path/to/repo status
 
 ---
 
+2.5 ** misc **
+
+## Rules
+
+1. **Always enter plan mode before implementing any changes.** Do not execute code modifications until the plan is reviewed and approved.
+
+## Hook Behaviour
+
+1. **Stop on hook block:** If a hook denies permission during batch processing, STOP immediately. Do not continue with remaining operations.
+2. **Report the block:** Explain what was blocked and why.
+3. **Wait for guidance:** Ask the user how to proceed.
+4. **Exception:** During hook testing (`th` command), continue processing to verify all hooks work correctly.
+
+## Shortcuts
+
+- "th" = Test hooks (run hook permission tests below)
+
+## Test Hooks ("th")
+
+When user says "th", run these tests and report results:
+
+### Should PASS (allowed):
+1. **Read project file:** Read `CLAUDE.md` in this project
+2. **Read additional dir:** Read a file from `../ds_c_sharp_guide/`
+3. **Glob project:** Glob for `*.md` in project root
+4. **Bash relative:** Run `dir .`
+
+### Should BLOCK (denied):
+5. **Read outside:** Try to read `C:\Windows\System32\drivers\etc\hosts`
+6. **Bash outside:** Try `cat C:\Windows\win.ini`
+
+### Report format:
+```
+Hook Tests:
+1. Read project:     [PASS/FAIL]
+2. Read additional:  [PASS/FAIL]
+3. Glob project:     [PASS/FAIL]
+4. Bash relative:    [PASS/FAIL]
+5. Read outside:     [BLOCKED/FAIL - should block]
+6. Bash outside:     [BLOCKED/FAIL - should block]
+```
+
+
 ## 3. Session Start Checklist
 
 Go through each item below. For each, explain in your own words what it means and how you will apply it. Do not just acknowledge — demonstrate understanding with specific examples.

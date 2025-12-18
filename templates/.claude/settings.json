@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet new:*)",
+      "Bash(dotnet sln add:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(dotnet run:*)",
+      "Bash(dotnet publish:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git -C:*)",
+      "Bash(dir:*)",
+      "Bash(rm:*)",
+      "Bash(taskkill:*)",
+      "Bash(powershell:*)",
+      "Bash(curl:*)",
+      "Bash(cp:*)",
+      "Bash(dotnet sln:*)",
+      "Bash(cat:*)",
+      "Edit(./**)",
+      "Write(./**)"
+    ],
+    "additionalDirectories": [
+      "../ds_c_sharp_guide"
+    ]
+  }
+}
