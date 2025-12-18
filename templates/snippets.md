@@ -1,12 +1,10 @@
-read claude.md follow instructions
+read prototype.md
 
 oauth client id and secret
 
 Did you read the project spec?
 
 ds sdfhgdgfhdf
-
-read claude.md. Report if you understand the building instructions.
 
 there are logs. Read them.
 
