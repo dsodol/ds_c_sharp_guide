@@ -5,6 +5,8 @@ These directories are separate git repos.
 
 C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide
 
+CRITICAL: ignore all files in C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\archive
+
 ## 1. Reference Locations
 
 1.1. Read C# Guide: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v2.md
