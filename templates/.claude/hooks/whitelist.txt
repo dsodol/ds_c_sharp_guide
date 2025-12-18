@@ -1,0 +1,13 @@
+# Optional additional directories whitelist
+# One path per line. Relative paths resolved from project root.
+# Lines starting with # are comments.
+#
+# The current project ($CLAUDE_PROJECT_DIR) is always allowed.
+# Paths in settings.json "additionalDirectories" are also allowed.
+# Use this file for extra paths not covered above.
+#
+# Examples:
+# C:\some\absolute\path
+# ../sibling_project
+
+C:\Users\dsodo\.claude\plans

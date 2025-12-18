@@ -1,8 +1,13 @@
 # Claude Behaviour
 
+## 0. Additional directories outside of the project
+These directories are separate git repos.
+
+C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide
+
 ## 1. Reference Locations
 
-1.1. Read C# Guide: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v1.md (repo: dsodol/ds_c_sharp_guide)
+1.1. Read C# Guide: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v2.md
 
 ---
 
