@@ -9,6 +9,8 @@ it is either:
 1) the chat was compacted
 2) or YOU DID SOMETHING WRONG. Think about it and report.
 
+when I say "lesson" write a lesson and howto
+
 Read: `..\ds_c_sharp_guide\claude_behaviour.md`
 
 
