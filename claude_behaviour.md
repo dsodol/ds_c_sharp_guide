@@ -83,7 +83,7 @@ Always enter plan mode before implementing any changes. Do not execute code modi
 
 ## 10. Hook Behaviour
 
-1. Stop on hook block: If a hook denies permission during batch processing, STOP immediately. Do not continue with remaining operations.
+1. Stop on hook block: If a hook denies permission, STOP immediately. Do NOT attempt alternative commands to achieve the same goal. This IS a bypass and violates the rule.
 2. Report the block: Explain what was blocked and why.
 3. Wait for guidance: Ask the user how to proceed.
 
@@ -158,7 +158,7 @@ CC MUST state each item by number and explain understanding in its own words.
 - A.16. Wait for plan approval before executing
 
 **Hooks:**
-- A.17. If hook denies permission — STOP immediately
+- A.17. If hook denies permission — STOP immediately. Do NOT attempt alternative commands to achieve the same goal. This IS a bypass and violates the rule.
 - A.18. Report what was blocked and why
 - A.19. Wait for guidance
 - A.20. Exception: during `th` command, continue to verify hooks
