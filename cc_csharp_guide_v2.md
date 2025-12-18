@@ -294,41 +294,41 @@ Must display a banner with build number at startup. Must support `--version` fla
 
 ## Appendix A. App Creation Checklist
 
-CC must go through this checklist explicitly after creating an app.
+CC must state each item by number and explain understanding in its own words.
 
 **Project Structure:**
-- [ ] All directories created: `.claude/`, `escalations/`, `howtos/`, `lessons_learned/`, `logs/`, `out/`, `resolutions/`, `src/`, `src/tests/`
-- [ ] `prototype.md` exists
-- [ ] `README.md` exists with reference to prototype.md
-- [ ] `.gitignore` exists
+- A.1. All directories created: `.claude/`, `escalations/`, `howtos/`, `lessons_learned/`, `logs/`, `out/`, `resolutions/`, `src/`, `src/tests/`
+- A.2. `prototype.md` exists
+- A.3. `README.md` exists with reference to prototype.md
+- A.4. `.gitignore` exists
 
 **Source:**
-- [ ] `.sln` in `src/`
-- [ ] Each app has its own project folder under `src/`
-- [ ] `Core` project exists for shared code
-- [ ] Each `.csproj` has output paths set to `out/`
-- [ ] Each `.csproj` has publish settings with `IncludeNativeLibrariesForSelfExtract`
+- A.5. `.sln` in `src/`
+- A.6. Each app has its own project folder under `src/`
+- A.7. `Core` project exists for shared code
+- A.8. Each `.csproj` has output paths set to `out/`
+- A.9. Each `.csproj` has publish settings with `IncludeNativeLibrariesForSelfExtract`
 
 **Build:**
-- [ ] `build.ps1` in project root
-- [ ] Build succeeds without errors
-- [ ] Exe copied to project root
+- A.10. `build.ps1` in project root
+- A.11. Build succeeds without errors
+- A.12. Exe copied to project root
 
 **Run:**
-- [ ] `run.ps1` in project root
-- [ ] App starts successfully
-- [ ] PID captured
-- [ ] Logs confirm no startup errors
+- A.13. `run.ps1` in project root
+- A.14. App starts successfully
+- A.15. PID captured
+- A.16. Logs confirm no startup errors
 
 **Logging:**
-- [ ] Logs written to `logs/`
-- [ ] Log format correct: `[yyyy-MM-dd HH:mm:ss.fff] [LEVEL] Message`
-- [ ] UI app: log panel shows same content as log files
+- A.17. Logs written to `logs/`
+- A.18. Log format correct: `[yyyy-MM-dd HH:mm:ss.fff] [LEVEL] Message`
+- A.19. UI app: log panel shows same content as log files
 
 **Build Number:**
-- [ ] `BuildInfo.cs` exists with current build number
-- [ ] UI app: build number shown in title bar
-- [ ] CLI app: banner displays build number at startup
-- [ ] CLI app: `--version` flag works
+- A.20. `BuildInfo.cs` exists with current build number
+- A.21. UI app: build number shown in title bar
+- A.22. CLI app: banner displays build number at startup
+- A.23. CLI app: `--version` flag works
 
 ---
