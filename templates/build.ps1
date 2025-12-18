@@ -52,7 +52,7 @@ if ($csprojContent -match '<TargetFramework>([^<]+)</TargetFramework>') {
 
 # Build paths
 $buildInfoPath = Join-Path $csprojDir "BuildInfo.cs"
-$publishDir = Join-Path $projectRoot "out\bin\Debug\$targetFramework\win-x64\publish"
+$publishDir = Join-Path $projectRoot "out\$projectName\bin\Debug\$targetFramework\win-x64\publish"
 $exeName = "$projectName.exe"
 
 # Generate build number
