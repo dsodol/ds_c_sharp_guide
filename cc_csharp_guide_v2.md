@@ -131,14 +131,18 @@ logs/
 
 ### 10.1. Output Paths
 
-Each .csproj must set output paths to keep build artifacts under `out/`. Example for MyProject.Console:
+Create `src/Directory.Build.props` to keep all build artifacts under `out/`:
 
 ```xml
-<PropertyGroup>
-  <BaseOutputPath>..\..\out\MyProject.Console\bin\</BaseOutputPath>
-  <BaseIntermediateOutputPath>..\..\out\MyProject.Console\obj\</BaseIntermediateOutputPath>
-</PropertyGroup>
+<Project>
+  <PropertyGroup>
+    <BaseOutputPath>$(MSBuildProjectDirectory)\..\..\out\$(MSBuildProjectName)\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildProjectDirectory)\..\..\out\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>
 ```
+
+This applies to all projects under `src/` automatically. Do not set output paths in individual .csproj files.
 
 ### 10.2. Publish Settings
 
@@ -306,7 +310,7 @@ CC must state each item by number and explain understanding in its own words.
 - A.5. `.sln` in `src/`
 - A.6. Each app has its own project folder under `src/`
 - A.7. `Core` project exists for shared code
-- A.8. Each `.csproj` has output paths set to `out/`
+- A.8. `src/Directory.Build.props` exists with output paths set to `out/`
 - A.9. Each `.csproj` has publish settings with `IncludeNativeLibrariesForSelfExtract`
 
 **Build:**
