@@ -118,8 +118,8 @@ Use `ls` to list directories, not `dir`.
 2. Go through behaviour checklist (Appendix A) — state each item, explain understanding
 
 **When creating an app:**
-1. Plan
-2. Go through app creation checklist from the guide — verify plan covers all requirements
+1. Go through app creation checklist from the guide — state understanding
+2. Plan
 3. Execute after approval
 4. Go through app creation checklist from the guide again — verify app meets requirements
 
