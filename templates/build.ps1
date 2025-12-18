@@ -57,7 +57,17 @@ $exeName = "$projectName.exe"
 
 # Generate build number
 $timestamp = Get-Date -Format "yyyy_MM_dd__HH_mm"
-$buildNumber = "${timestamp}__001"
+$buildCounter = 1
+
+# Read existing counter from BuildInfo.cs if exists
+if (Test-Path $buildInfoPath) {
+    $content = Get-Content $buildInfoPath -Raw
+    if ($content -match 'Number = ".*__(\d+)"') {
+        $buildCounter = [int]$matches[1] + 1
+    }
+}
+
+$buildNumber = "${timestamp}__$($buildCounter.ToString('D3'))"
 
 Write-Host "=== Build Script ===" -ForegroundColor Cyan
 Write-Host "Project: $projectName"
