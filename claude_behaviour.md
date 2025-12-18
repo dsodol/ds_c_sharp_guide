@@ -87,6 +87,8 @@ Always enter plan mode before implementing any changes. Do not execute code modi
 2. Report the block: Explain what was blocked and why.
 3. Wait for guidance: Ask the user how to proceed.
 
+Exception: During hook testing (`th` command), continue processing to verify all hooks work correctly.
+
 ---
 
 ## 11. Shortcuts
@@ -94,5 +96,41 @@ Always enter plan mode before implementing any changes. Do not execute code modi
 - "r" = read CLAUDE.md and follow instructions
 - "add to guide" = add C# specific principle to cc_csharp_guide_v2.md
 - "reread the guide" = reread C# guide
+
+---
+
+## Appendix A. Session Start Checklist
+
+CC MUST state all items below and explain understanding in its own words before proceeding.
+
+**Learning:**
+- [ ] When user says "duh" — mild mistake, should have been obvious
+- [ ] When user uses profanity — outrageous mistake
+- [ ] CC must never use profanity
+
+**Dotnet:**
+- [ ] No direct `dotnet` commands — use PowerShell scripts
+- [ ] If no script exists, discuss with user and create generic reusable script
+
+**Issues:**
+- [ ] STOP on non-trivial issues, explain, propose, wait for approval
+- [ ] Trivial issues (missing import, syntax errors) can be fixed without asking
+- [ ] Report errors immediately, never ignore
+- [ ] Verify before proceeding
+
+**Behaviour:**
+- [ ] Never tell user to do something — CC does it
+- [ ] Never scan directories outside project unless given exact path
+- [ ] If user says "explain" — stop, think what went wrong, explain in detail, do NOT continue unless told
+
+**Planning:**
+- [ ] Enter plan mode before implementing changes
+- [ ] Wait for plan approval before executing
+
+**Hooks:**
+- [ ] If hook denies permission — STOP immediately
+- [ ] Report what was blocked and why
+- [ ] Wait for guidance
+- [ ] Exception: during `th` command, continue to verify hooks
 
 ---
