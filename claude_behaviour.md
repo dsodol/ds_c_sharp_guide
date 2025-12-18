@@ -9,7 +9,7 @@ CRITICAL: ignore all files in C:\Users\dsodo\project\built_with_ai\ds_c_sharp_gu
 
 ## 1. Reference Locations
 
-1.1. Read C# Guide: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v2.md
+1.1. Read C# Guide: ..\ds_c_sharp_guide\cc_csharp_guide_v2.md IF EXISTS.
 
 ---
 
