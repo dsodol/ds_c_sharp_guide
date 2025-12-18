@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!-- Claude: This is a ds-html document. Read the ds-html skill before editing. -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>C# Project Guide v3</title>
+    <style>
+body { font-family: Aptos, sans-serif; font-size: 14pt; line-height: 1.6; max-width: 800px; margin: 2em auto; }
+code, pre { font-family: "JetBrains Mono", monospace; font-size: 13pt; background: #f4f4f4; }
+code { padding: 2px 6px; }
+pre { padding: 1em; overflow-x: auto; }
+ol, ul { list-style: none; padding-left: 2em; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+
+<h1  id="zT0c" ds_html_skip>Table of Contents</h1>
+<ol id="aV1d">
+    <li  id="bW2e">1. <a href="#o6E4">Purpose</a></li>
+    <li  id="cX3f">2. <a href="#RLer">Context</a></li>
+    <li  id="dY4g">3. <a href="#mxlV">Platform</a></li>
+    <li  id="eZ5h">4. <a href="#XuQF">Typical Project Composition</a></li>
+    <li  id="fA6i">5. <a href="#lFkB">Naming</a></li>
+    <li  id="gB7j">6. <a href="#Xmta">Architecture</a></li>
+    <li  id="hC8k">7. <a href="#PrXS">Project Bootstrap</a></li>
+    <li  id="iD9l">8. <a href="#8ieG">Project Structure</a></li>
+    <li  id="jE0m">9. <a href="#buSf">.gitignore</a></li>
+    <li  id="kF1n">10. <a href="#yigG">csproj Settings</a>
+        <ol id="lG2o">
+            <li  id="mH3p">a) <a href="#0Tlq">Output Paths</a></li>
+            <li  id="nI4q">b) <a href="#iJLp">Publish Settings</a></li>
+        </ol>
+    </li>
+    <li  id="oJ5r">11. <a href="#jeeq">Build</a>
+        <ol id="pK6s">
+            <li  id="qL7t">a) <a href="#1avs">Output Rule</a></li>
+            <li  id="rM8u">b) <a href="#9CSr">Build Script</a></li>
+            <li  id="sN9v">c) <a href="#qamD">Exe Location</a></li>
+        </ol>
+    </li>
+    <li  id="tO0w">12. <a href="#VsI5">Working Directory</a></li>
+    <li  id="uP1x">13. <a href="#Nsxj">Run</a>
+        <ol id="vQ2y">
+            <li  id="wR3z">a) <a href="#fXpW">Run Script</a></li>
+            <li  id="xS4a">b) <a href="#wqAz">Startup Verification</a></li>
+            <li  id="yT5b">c) <a href="#ElA5">Killing Processes</a></li>
+        </ol>
+    </li>
+    <li  id="zU6c">14. <a href="#hY0X">Logging</a>
+        <ol id="aV7d">
+            <li  id="bW8e">a) <a href="#cgy9">General</a></li>
+            <li  id="cX9f">b) <a href="#JCCL">Location</a></li>
+            <li  id="dY0g">c) <a href="#VcXe">File Naming</a></li>
+            <li  id="eZ1h">d) <a href="#mnKK">Rotation</a></li>
+            <li  id="fA2i">e) <a href="#s5E9">Format</a></li>
+            <li  id="gB3j">f) <a href="#Uw3t">UI Apps</a></li>
+            <li  id="hC4k">g) <a href="#bK7m">CLI Apps</a></li>
+        </ol>
+    </li>
+    <li  id="iD5l">15. <a href="#gR2v">Build Number</a>
+        <ol id="jE6m">
+            <li  id="kF7n">a) <a href="#hT8w">Format</a></li>
+            <li  id="lG8o">b) <a href="#nB8a">Generation</a></li>
+            <li  id="mH9p">c) <a href="#pD0c">UI Apps</a></li>
+            <li  id="nI0q">d) <a href="#rF2e">CLI Apps</a></li>
+        </ol>
+    </li>
+</ol>
+<p id="oJ1r"><strong>Appendix</strong></p>
+<ul id="pK2s">
+    <li id="qL3t"><a href="#tH4g">A. App Creation Checklist</a></li>
+</ul>
+
+<h1    id="o6E4">1. Purpose</h1>
+<p id="YlaM">Defines defaults for creating C# applications. Claude follows this guide unless the user specifies otherwise.</p>
+<p id="mHce">"I" and "me" in this guide refers to the human user.</p>
+<p id="K1Uq">Read next: <code>cc_ui_guide.md</code> (when building UI)</p>
+
+<h1    id="RLer">2. Context</h1>
+<p id="4cDn">Projects are for personal use.</p>
+<p id="Y3H4">My tastes are peculiar and can be described as old school. Examples: no dark themes by default. When Claude must choose between new and shiny vs older but stable — prefer older, nicer, more usable, more stable.</p>
+<p id="m04O">Installers, when present, are for convenience only.</p>
+
+<h1    id="mxlV">3. Platform</h1>
+<table id="bcps">
+    <tr><th>Setting</th><th>Default</th></tr>
+    <tr><td>.NET</td><td>10</td></tr>
+    <tr><td>Configuration</td><td>Debug only — never Release</td></tr>
+    <tr><td>Runtime</td><td>win-x64</td></tr>
+    <tr><td>UI Framework</td><td>WPF</td></tr>
+</table>
+
+<h1    id="XuQF">4. Typical Project Composition</h1>
+<p id="3wWi">A typical project contains both UI and console apps. They typically share code.</p>
+
+<h1    id="lFkB">5. Naming</h1>
+<ol id="yWRy">
+    <li    id="PJVv">1. <code>snake_case</code> for project/folder names</li>
+    <li    id="Q2w6">2. <code>PascalCase.With.Dots</code> for C# namespaces, project names, classes, methods</li>
+</ol>
+<p id="XUdI">Example: folder <code>my_cool_app</code>, C# project <code>MyCoolApp.Console</code></p>
+
+<h1    id="Xmta">6. Architecture</h1>
+<ol id="xoWb">
+    <li    id="Dtgq">1. <strong>Pattern:</strong> Code-Behind + Service Layer</li>
+    <li    id="nSQJ">2. Do NOT use MVVM unless explicitly requested</li>
+</ol>
+
+<h1    id="PrXS">7. Project Bootstrap</h1>
+<p id="HGiA">When I create a new project, I copy template files from <code>..\ds_c_sharp_guide\templates</code> into the project folder. When Claude first reads instructions in a greenfield project, these files are expected to already be present.</p>
+<p id="I8sm">To initialize .NET projects, see <code>howtos/init_project.md</code>.</p>
+
+<h1    id="8ieG">8. Project Structure</h1>
+<pre id="64Mz">my_project/
+├── .claude/
+├── escalations/
+├── howtos/
+├── lessons_learned/
+├── logs/
+├── out/
+│   ├── MyProject.Console/
+│   │   ├── bin/
+│   │   └── obj/
+│   ├── MyProject.Core/
+│   │   ├── bin/
+│   │   └── obj/
+│   └── MyProject.Ui/
+│       ├── bin/
+│       └── obj/
+├── resolutions/
+├── src/
+│   ├── MyProject.Console/
+│   │   └── MyProject.Console.csproj
+│   ├── MyProject.Core/
+│   │   └── MyProject.Core.csproj
+│   ├── MyProject.Ui/
+│   │   └── MyProject.Ui.csproj
+│   ├── tests/
+│   │   └── MyProject.IntegrationTests/
+│   │       └── MyProject.IntegrationTests.csproj
+│   └── MyProject.sln
+├── .gitignore
+├── prototype.md
+└── README.md</pre>
+
+<table id="doXk">
+    <tr><th>Directory/File</th><th>Purpose</th></tr>
+    <tr><td><code>.claude/</code></td><td>Claude Code settings and hooks</td></tr>
+    <tr><td><code>escalations/</code></td><td>Problems CC could not solve, to be picked up by Claude.ai</td></tr>
+    <tr><td><code>howtos/</code></td><td>Step-by-step instructions, derived from lessons learned</td></tr>
+    <tr><td><code>lessons_learned/</code></td><td>CC's reports on its own mistakes</td></tr>
+    <tr><td><code>logs/</code></td><td>Runtime logs</td></tr>
+    <tr><td><code>out/</code></td><td>Build output; each project has its own subtree</td></tr>
+    <tr><td><code>resolutions/</code></td><td>Claude.ai answers to escalations, or summaries of spec changes</td></tr>
+    <tr><td><code>src/</code></td><td>Source code; contains .sln and project folders</td></tr>
+    <tr><td><code>src/MyProject.Core/</code></td><td>Shared code (compiles to .dll); referenced by Console and Ui</td></tr>
+    <tr><td><code>prototype.md</code></td><td>Initial intuitions; CC adds Q&amp;A during prototyping phase</td></tr>
+    <tr><td><code>README.md</code></td><td>Empty except reference to prototype.md or high-level spec</td></tr>
+</table>
+<p id="tyGJ">CC must create all directories explicitly.</p>
+
+<h1    id="buSf">9. .gitignore</h1>
+<pre id="VkBw">out/
+logs/
+*.exe
+*.dll
+*.pdb
+*.user
+.vs/</pre>
+
+<h1    id="yigG">10. csproj Settings</h1>
+
+<h2    id="0Tlq">10.1 Output Paths</h2>
+<p id="EqW4">Create <code>src/Directory.Build.props</code> to keep all build artifacts under <code>out/</code>:</p>
+<pre id="7YK4">&lt;Project&gt;
+  &lt;PropertyGroup&gt;
+    &lt;BaseOutputPath&gt;$(MSBuildProjectDirectory)\..\..\out\$(MSBuildProjectName)\bin\&lt;/BaseOutputPath&gt;
+    &lt;BaseIntermediateOutputPath&gt;$(MSBuildProjectDirectory)\..\..\out\$(MSBuildProjectName)\obj\&lt;/BaseIntermediateOutputPath&gt;
+  &lt;/PropertyGroup&gt;
+&lt;/Project&gt;</pre>
+<p id="Or1J">This applies to all projects under <code>src/</code> automatically. Do not set output paths in individual .csproj files.</p>
+
+<h2    id="iJLp">10.2 Publish Settings</h2>
+<p id="qkwR">For standalone single-file executables:</p>
+<pre id="rWOZ">&lt;PropertyGroup&gt;
+  &lt;RuntimeIdentifier&gt;win-x64&lt;/RuntimeIdentifier&gt;
+  &lt;PublishSingleFile&gt;true&lt;/PublishSingleFile&gt;
+  &lt;SelfContained&gt;true&lt;/SelfContained&gt;
+  &lt;PublishReadyToRun&gt;true&lt;/PublishReadyToRun&gt;
+  &lt;IncludeNativeLibrariesForSelfExtract&gt;true&lt;/IncludeNativeLibrariesForSelfExtract&gt;
+&lt;/PropertyGroup&gt;</pre>
+<p id="Gv2g">Note: <code>IncludeNativeLibrariesForSelfExtract</code> is required — without it, the exe will fail with missing DLL errors.</p>
+
+<h1    id="jeeq">11. Build</h1>
+
+<h2    id="1avs">11.1 Output Rule</h2>
+<p id="NjEC">All compiler-generated files must be under <code>out/</code>. Never mixed with source.</p>
+
+<h2    id="9CSr">11.2 Build Script</h2>
+<p id="Rfz1">Build is done using <code>build.ps1</code> in project root.</p>
+<p id="sfzn"><strong>Usage:</strong></p>
+<pre id="9kzh">.\build.ps1 -Project &lt;n&gt;</pre>
+<p id="Okef"><strong>What it does:</strong></p>
+<ol id="nB8P">
+    <li    id="TYjY">1. Updates BuildInfo.cs with timestamp</li>
+    <li    id="h4Ap">2. Runs <code>dotnet publish</code> with required flags</li>
+    <li    id="utJJ">3. Copies exe to project root</li>
+</ol>
+<p id="m7Iw"><code>build.ps1</code> is copied from templates during project bootstrap.</p>
+<p id="qjv2">Note: <code>build.ps1</code> has a <code>-Run</code> flag; running is covered in a later chapter.</p>
+
+<h2    id="qamD">11.3 Exe Location</h2>
+<p id="rTcu">Only exes for apps (Console, Ui) are copied to project root. Dlls (Core) and test projects stay in <code>out/</code> only.</p>
+<p id="aRYf">After building everything:</p>
+<pre id="2Pup">my_project/
+├── MyProject.Console.exe
+├── MyProject.Ui.exe
+├── out/
+│   ├── MyProject.Console/...
+│   ├── MyProject.Core/...
+│   ├── MyProject.Ui/...
+│   └── MyProject.IntegrationTests/...</pre>
+
+<h1    id="VsI5">12. Working Directory</h1>
+<p id="lrTj">Every app must have a concept of working directory.</p>
+<p id="rNfs"><strong>Default:</strong> Directory where exe is located.</p>
+<p id="MScn"><strong>Override:</strong> Command line parameter <code>--wd &lt;path&gt;</code> to specify a different working directory.</p>
+<p id="cbkr">All relative paths (logs, config, data) resolve relative to the working directory.</p>
+
+<h1    id="Nsxj">13. Run</h1>
+
+<h2    id="fXpW">13.1 Run Script</h2>
+<p id="1Ohm">Running is done using <code>run.ps1</code> in project root.</p>
+<p id="i6oT"><strong>Usage:</strong></p>
+<pre id="eh2a">.\run.ps1 -Project &lt;n&gt;</pre>
+<p id="l3JS"><strong>What it does:</strong></p>
+<ol id="mX7X">
+    <li    id="k1DB">1. Finds exe in project root</li>
+    <li    id="TdyU">2. Starts the exe</li>
+    <li    id="Xh2x">3. Returns PID on success</li>
+    <li    id="56LE">4. Returns error if it fails (exe missing, missing DLLs, etc.)</li>
+</ol>
+<p id="up0X"><code>run.ps1</code> is copied from templates during project bootstrap.</p>
+
+<h2    id="wqAz">13.2 Startup Verification</h2>
+<p id="Fdq8">After starting a process, CC must:</p>
+<ol id="t5Fi">
+    <li    id="IFjQ">1. Verify startup via logs</li>
+    <li    id="zgxz">2. Check logs for any startup errors</li>
+    <li    id="v8FQ">3. If errors found:
+        <ol id="SSqV">
+            <li    id="2xFG">a) Investigate</li>
+            <li    id="JiTR">b) Discuss with me</li>
+            <li    id="Jvko">c) Propose a fix</li>
+        </ol>
+    </li>
+    <li    id="MrN1">4. Confirm explicitly that no errors were found in the logs during startup</li>
+</ol>
+<p id="JmBF">A process may start (PID exists) but fail internally. Only proceed after confirming logs show successful startup.</p>
+
+<h2    id="ElA5">13.3 Killing Processes</h2>
+<p id="7a8B">CC can only kill processes CC started, only by PID. If PID was not captured, ask user to stop manually.</p>
+
+<h1    id="hY0X">14. Logging</h1>
+
+<h2    id="cgy9">14.1 General</h2>
+<p id="4hod">All apps must have logging with variable log level.</p>
+
+<h2    id="JCCL">14.2 Location</h2>
+<p id="ivnC">Logs go to <code>logs/</code> subdirectory (relative to working directory).</p>
+
+<h2    id="VcXe">14.3 File Naming</h2>
+<p id="6MyX">Log files are named after the project (e.g., <code>MyProject.Console.log</code>). This allows multiple apps in the same working directory.</p>
+
+<h2    id="mnKK">14.4 Rotation</h2>
+<p id="oDVG">On startup, rename existing log to timestamped version. Keep only 3 log files.</p>
+<p id="ppof">If the log file is locked at startup (e.g., user is viewing it), ignore and create a new file.</p>
+
+<h2    id="s5E9">14.5 Format</h2>
+<p id="0ciz"><code>[yyyy-MM-dd HH:mm:ss.fff] [LEVEL] Message</code></p>
+
+<h2    id="Uw3t">14.6 UI Apps</h2>
+<p id="xL9e">Must have a log panel with the same exact contents as log files.</p>
+
+<h2    id="bK7m">14.7 CLI Apps</h2>
+<p id="pQ4n">Write logs to files only.</p>
+
+<h1    id="gR2v">15. Build Number</h1>
+
+<h2    id="hT8w">15.1 Format</h2>
+<p id="jY5x"><code>YYYY_MM_DD__HH_mm__NNN</code></p>
+<p id="kZ6y">Example: <code>2025_12_18__14_30__047</code></p>
+<p id="mA7z">NNN is a build counter that increments every build (never resets).</p>
+
+<h2    id="nB8a">15.2 Generation</h2>
+<p id="oC9b">Build number is generated by <code>build.ps1</code> and written to <code>BuildInfo.cs</code>.</p>
+
+<h2    id="pD0c">15.3 UI Apps</h2>
+<p id="qE1d">Must show build number in the title bar.</p>
+
+<h2    id="rF2e">15.4 CLI Apps</h2>
+<p id="sG3f">Must display a banner with build number at startup. Must support <code>--version</code> flag.</p>
+
+<h1  id="tH4g" ds_html_appendix="A">A. App Creation Checklist</h1>
+<p id="uI5h">CC must quote each item verbatim, then explain understanding in its own words.</p>
+
+<h2    id="vJ6i">A.1 Project Structure</h2>
+<ol id="wK7j">
+    <li    id="xL8k">1. All directories created: <code>.claude/</code>, <code>escalations/</code>, <code>howtos/</code>, <code>lessons_learned/</code>, <code>logs/</code>, <code>out/</code>, <code>resolutions/</code>, <code>src/</code>, <code>src/tests/</code></li>
+    <li    id="yM9l">2. <code>prototype.md</code> exists</li>
+    <li    id="zN0m">3. <code>README.md</code> exists with reference to prototype.md</li>
+    <li    id="aO1n">4. <code>.gitignore</code> exists</li>
+</ol>
+
+<h2    id="bP2o">A.2 Source</h2>
+<ol id="cQ3p">
+    <li    id="dR4q">1. <code>.sln</code> in <code>src/</code></li>
+    <li    id="eS5r">2. Each app has its own project folder under <code>src/</code></li>
+    <li    id="fT6s">3. <code>Core</code> project exists for shared code</li>
+    <li    id="gU7t">4. <code>src/Directory.Build.props</code> exists with output paths set to <code>out/</code></li>
+    <li    id="hV8u">5. Each <code>.csproj</code> has publish settings with <code>IncludeNativeLibrariesForSelfExtract</code></li>
+</ol>
+
+<h2    id="iW9v">A.3 Working Directory</h2>
+<ol id="jX0w">
+    <li    id="kY1x">1. App has concept of working directory</li>
+    <li    id="lZ2y">2. Default is directory where exe is located</li>
+    <li    id="mA3z">3. <code>--wd &lt;path&gt;</code> parameter to override</li>
+    <li    id="nB4a">4. All relative paths resolve relative to working directory</li>
+</ol>
+
+<h2    id="oC5b">A.4 Build</h2>
+<ol id="pD6c">
+    <li    id="qE7d">1. <code>build.ps1</code> in project root</li>
+    <li    id="rF8e">2. Build succeeds without errors</li>
+    <li    id="sG9f">3. Exe copied to project root</li>
+</ol>
+
+<h2    id="tH0g">A.5 Run</h2>
+<ol id="uI1h">
+    <li    id="vJ2i">1. <code>run.ps1</code> in project root</li>
+    <li    id="wK3j">2. App starts successfully</li>
+    <li    id="xL4k">3. PID captured</li>
+    <li    id="yM5l">4. Logs confirm no startup errors</li>
+</ol>
+
+<h2    id="zN6m">A.6 Logging</h2>
+<ol id="aO7n">
+    <li    id="bP8o">1. Logs written to <code>logs/</code> (relative to working directory)</li>
+    <li    id="cQ9p">2. Log files named after project</li>
+    <li    id="dR0q">3. Log format correct: <code>[yyyy-MM-dd HH:mm:ss.fff] [LEVEL] Message</code></li>
+    <li    id="eS1r">4. UI app: log panel shows same content as log files</li>
+</ol>
+
+<h2    id="fT2s">A.7 Build Number</h2>
+<ol id="gU3t">
+    <li    id="hV4u">1. <code>BuildInfo.cs</code> exists with current build number</li>
+    <li    id="iW5v">2. UI app: build number shown in title bar</li>
+    <li    id="jX6w">3. CLI app: banner displays build number at startup</li>
+    <li    id="kY7x">4. CLI app: <code>--version</code> flag works</li>
+</ol>
+
+</body>
+</html>
