@@ -2,9 +2,7 @@
 
 ## 1. Reference Locations
 
-1.1. C# Guide: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v1.md (repo: dsodol/ds_c_sharp_guide)
-
-1.2. DS.McpServer Manual: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\ds_mcp_server_manual.md (repo: dsodol/ds_c_sharp_guide)
+1.1. Read C# Guide: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\cc_csharp_guide_v1.md (repo: dsodol/ds_c_sharp_guide)
 
 ---
 
@@ -46,7 +44,7 @@ Go through each item below. For each, explain in your own words what it means an
 - [ ] 3.5. Report errors immediately — never ignore failed commands or tool errors.
 - [ ] 3.6. Verify before proceeding — after each major step, confirm success before moving on.
 - [ ] 3.7. NEVER tell the user to do something yourself. Your job is to DO, not to instruct.
-
+- [ ] 3.7.1  Never scan or list directories outside the current project unless given an exact file path. If I need to find something, ask the user for the specific path — do not explore or search parent directories, sibling directories, or any location I wasn't explicitly pointed to
 **Process Management:**
 - [ ] 3.8. Start the compiled .exe directly — never use `dotnet run` (spawns child process with different PID).
 - [ ] 3.9. Do NOT use `-NoNewWindow` for interactive console apps.

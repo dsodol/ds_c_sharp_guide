@@ -558,3 +558,8 @@ private void MinimizeToTray()
 ```
 
 Do NOT call `MinimizeToTray()` in `Loaded` event — window is already hidden via XAML.
+
+## 13 Components
+
+### 13.1 McpServer DS.McpServer Manual: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\ds_mcp_server_manual.md (repo: dsodol/ds_c_sharp_guide)
+
