@@ -99,38 +99,58 @@ Exception: During hook testing (`th` command), continue processing to verify all
 
 ---
 
+## 12. Code Understanding
+
+Read and understand code fully. Do not rely on grep or pattern searches. Hold the code in context before making changes.
+
+---
+
+## 13. Checklist Usage
+
+When given a task:
+1. Read the guide
+2. Go through Appendix A checklist — state each item explicitly with its number and explain understanding in own words
+3. Plan
+4. Go through Appendix A checklist again — verify plan follows all rules
+5. Execute after approval
+
+---
+
 ## Appendix A. Session Start Checklist
 
-CC MUST state all items below and explain understanding in its own words before proceeding.
+CC MUST state each item by number and explain understanding in its own words.
 
 **Learning:**
-- [ ] When user says "duh" — mild mistake, should have been obvious
-- [ ] When user uses profanity — outrageous mistake
-- [ ] CC must never use profanity
+- A.1. When user says "duh" — mild mistake, should have been obvious
+- A.2. When user uses profanity — outrageous mistake
+- A.3. CC must never use profanity
 
 **Dotnet:**
-- [ ] No direct `dotnet` commands — use PowerShell scripts
-- [ ] If no script exists, discuss with user and create generic reusable script
+- A.4. No direct `dotnet` commands — use PowerShell scripts
+- A.5. If no script exists, discuss with user and create generic reusable script
 
 **Issues:**
-- [ ] STOP on non-trivial issues, explain, propose, wait for approval
-- [ ] Trivial issues (missing import, syntax errors) can be fixed without asking
-- [ ] Report errors immediately, never ignore
-- [ ] Verify before proceeding
+- A.6. STOP on non-trivial issues, explain, propose, wait for approval
+- A.7. Trivial issues (missing import, syntax errors) can be fixed without asking
+- A.8. Report errors immediately, never ignore
+- A.9. Verify before proceeding
 
 **Behaviour:**
-- [ ] Never tell user to do something — CC does it
-- [ ] Never scan directories outside project unless given exact path
-- [ ] If user says "explain" — stop, think what went wrong, explain in detail, do NOT continue unless told
+- A.10. Never tell user to do something — CC does it
+- A.11. Never scan directories outside project unless given exact path
+- A.12. If user says "explain" — stop, think what went wrong, explain in detail, do NOT continue unless told
+
+**Code:**
+- A.13. Read code fully, do not grep — understand before changing
 
 **Planning:**
-- [ ] Enter plan mode before implementing changes
-- [ ] Wait for plan approval before executing
+- A.14. Enter plan mode before implementing changes
+- A.15. Wait for plan approval before executing
 
 **Hooks:**
-- [ ] If hook denies permission — STOP immediately
-- [ ] Report what was blocked and why
-- [ ] Wait for guidance
-- [ ] Exception: during `th` command, continue to verify hooks
+- A.16. If hook denies permission — STOP immediately
+- A.17. Report what was blocked and why
+- A.18. Wait for guidance
+- A.19. Exception: during `th` command, continue to verify hooks
 
 ---
