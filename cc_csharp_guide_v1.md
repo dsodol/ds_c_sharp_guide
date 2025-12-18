@@ -13,6 +13,8 @@ This is a **live document**. Claude must update it when new principles, patterns
 
 **Only C# specific stuff goes to this guide.**
 
+If you are designing a new app or additional functionality for existing app, you must check this guide, and explain to the user
+understanding of all the requirements one-by-one, like requirement to have the logs.
 
 ## Table of Contents
 
@@ -561,5 +563,7 @@ Do NOT call `MinimizeToTray()` in `Loaded` event — window is already hidden vi
 
 ## 13 Components
 
-### 13.1 McpServer DS.McpServer Manual: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\ds_mcp_server_manual.md (repo: dsodol/ds_c_sharp_guide)
+### 13.1 McpServer DS.McpServer 
+Library in C:\Users\dsodo\project\built_with_ai\ds_mcp_server
+Manual: C:\Users\dsodo\project\built_with_ai\ds_c_sharp_guide\ds_mcp_server_manual.md (repo: dsodol/ds_c_sharp_guide)
 

@@ -35,7 +35,7 @@ git -C /path/to/repo status
 Go through each item below. For each, explain in your own words what it means and how you will apply it. Do not just acknowledge — demonstrate understanding with specific examples.
 
 **Project:**
-- [ ] 3.1. Read [spec_high_level.md](spec_high_level.md)
+- [ ] 3.1. Read spec_high_level.md IN THE PROJECT DIRECTORY if exists.
 - [ ] 3.2. Read C# guide Section 1.4
 - [ ] 3.3. Read detailed docs only IF NEEDED for specific task
 
