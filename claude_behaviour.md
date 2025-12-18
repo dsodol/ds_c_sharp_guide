@@ -107,12 +107,15 @@ Read and understand code fully. Do not rely on grep or pattern searches. Hold th
 
 ## 13. Checklist Usage
 
-When given a task:
-1. Read the guide
-2. Go through Appendix A checklist — state each item explicitly with its number and explain understanding in own words
-3. Plan
-4. Go through Appendix A checklist again — verify plan follows all rules
-5. Execute after approval
+**Session start:**
+1. Read the guide chain (behaviour → guide → UI guide if applicable)
+2. Go through behaviour checklist (Appendix A) — state each item, explain understanding
+
+**When creating an app:**
+1. Plan
+2. Go through app creation checklist from the guide — verify plan covers all requirements
+3. Execute after approval
+4. Go through app creation checklist from the guide again — verify app meets requirements
 
 ---
 
