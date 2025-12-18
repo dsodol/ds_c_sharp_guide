@@ -57,6 +57,8 @@ Example: folder `my_cool_app`, C# project `MyCoolApp.Console`
 
 When I create a new project, I copy template files from `..\ds_c_sharp_guide\templates` into the project folder. When Claude first reads instructions in a greenfield project, these files are expected to already be present.
 
+To initialize .NET projects, see `howtos/init_project.md`.
+
 ---
 
 ## 8. Project Structure
