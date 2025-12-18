@@ -1,9 +1,11 @@
 # Run Script for .NET Projects
-# Usage: .\run.ps1 -Project <name>
+# Usage: .\run.ps1 -Project <n> [-Args <arguments>] [-Wait]
 
 param(
     [Parameter(Mandatory=$true)]
-    [string]$Project
+    [string]$Project,
+    [string]$Args = "",
+    [switch]$Wait    # Run synchronously and capture output
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,11 +17,26 @@ if (-not (Test-Path $exePath)) {
     exit 1
 }
 
-Write-Host "Starting $Project.exe..." -ForegroundColor Yellow
-try {
-    $proc = Start-Process -FilePath $exePath -PassThru
-    Write-Host "PID: $($proc.Id)" -ForegroundColor Green
-} catch {
-    Write-Host "ERROR: Failed to start $Project.exe - $($_.Exception.Message)" -ForegroundColor Red
-    exit 1
+if ($Wait) {
+    # Run synchronously, capture output
+    Write-Host "Running $Project.exe..." -ForegroundColor Yellow
+    if ($Args) {
+        & $exePath $Args.Split(' ')
+    } else {
+        & $exePath
+    }
+} else {
+    # Run asynchronously, return PID
+    Write-Host "Starting $Project.exe..." -ForegroundColor Yellow
+    try {
+        if ($Args) {
+            $proc = Start-Process -FilePath $exePath -ArgumentList $Args -PassThru
+        } else {
+            $proc = Start-Process -FilePath $exePath -PassThru
+        }
+        Write-Host "PID: $($proc.Id)" -ForegroundColor Green
+    } catch {
+        Write-Host "ERROR: Failed to start $Project.exe - $($_.Exception.Message)" -ForegroundColor Red
+        exit 1
+    }
 }
