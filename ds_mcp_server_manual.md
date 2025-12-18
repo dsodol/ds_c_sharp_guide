@@ -15,7 +15,7 @@ A .NET 10 library for building MCP (Model Context Protocol) servers that expose 
 9. [Events](#9-events)
 10. [SSE Transport Protocol](#10-sse-transport-protocol)
 11. [Testing](#11-testing)
-12. [Complete Example](#12-complete-example)
+12. [Complete Example (Production Pattern)](#12-complete-example-production-pattern)
 
 ---
 
@@ -53,13 +53,15 @@ Add a project reference to DS.McpServer:
 </ItemGroup>
 ```
 
-### Minimal Server
+### Minimal Server (Quick Testing Only)
+
+> **Warning:** The minimal constructor is for quick testing only. For production use, always use the constructor with `ILoggerFactory` (see [Complete Example](#12-complete-example)). Without a logger factory, request/response logging is disabled.
 
 ```csharp
 using DS.McpServer;
 using DS.McpServer.Models;
 
-// Create server with minimal configuration
+// Create server with minimal configuration (testing only)
 using var server = new GenericMcpServer(port: 43875);
 
 // Register a simple tool
@@ -71,6 +73,43 @@ server.RegisterTool(
 );
 
 // Start and wait
+await server.StartAsync();
+Console.WriteLine($"Server running at {server.ServerUrl}");
+Console.ReadLine();
+await server.StopAsync();
+```
+
+### Production Server (Recommended)
+
+For production use, always create a `LoggerFactory` and pass it to the constructor:
+
+```csharp
+using DS.McpServer;
+using DS.McpServer.Models;
+using Microsoft.Extensions.Logging;
+
+// Setup logging (REQUIRED for production)
+var loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddConsole().SetMinimumLevel(LogLevel.Information);
+});
+
+var options = new McpServerOptions
+{
+    Port = 43875,
+    ServerName = "My MCP Server"
+};
+
+// Always pass loggerFactory for production use
+using var server = new GenericMcpServer(options, loggerFactory);
+
+server.RegisterTool(
+    name: "hello",
+    description: "Says hello",
+    schema: new ToolSchema { Type = "object" },
+    handler: async (args) => new { message = "Hello, World!" }
+);
+
 await server.StartAsync();
 Console.WriteLine($"Server running at {server.ServerUrl}");
 Console.ReadLine();
@@ -529,7 +568,12 @@ curl -X POST "http://localhost:43875/messages?sessionId=abc123" \
 
 ---
 
-## 12. Complete Example
+## 12. Complete Example (Production Pattern)
+
+This is the recommended pattern for production use. Key points:
+- Always create and pass `ILoggerFactory` to enable logging
+- Use `McpServerOptions` for full configuration
+- Handle `--version` and other command-line flags
 
 ### Program.cs
 
