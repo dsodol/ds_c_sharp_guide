@@ -1,0 +1,279 @@
+# C# Project Guide v2
+
+## 1. Purpose
+
+Defines defaults for creating C# applications. Claude follows this guide unless the user specifies otherwise.
+
+"I" and "me" in this guide refers to the human user.
+
+---
+
+## 2. Context
+
+Projects are for personal use.
+
+My tastes are peculiar and can be described as old school. Examples: no dark themes by default. When Claude must choose between new and shiny vs older but stable — prefer older, nicer, more usable, more stable.
+
+Installers, when present, are for convenience only.
+
+---
+
+## 3. Platform
+
+| Setting | Default |
+|---------|---------|
+| .NET | 10 |
+| Configuration | Debug only — never Release |
+| Runtime | win-x64 |
+| UI Framework | WPF |
+
+---
+
+## 4. Typical Project Composition
+
+A typical project contains both UI and console apps. They typically share code.
+
+---
+
+## 5. Project Bootstrap
+
+When I create a new project, I copy template files from `..\ds_c_sharp_guide\templates` into the project folder. When Claude first reads instructions in a greenfield project, these files are expected to already be present.
+
+---
+
+## 6. Project Structure
+
+```
+my_project/
+├── .claude/
+├── escalations/
+├── howtos/
+├── lessons_learned/
+├── logs/
+├── out/
+│   ├── MyProject.Console/
+│   │   ├── bin/
+│   │   └── obj/
+│   ├── MyProject.Core/
+│   │   ├── bin/
+│   │   └── obj/
+│   └── MyProject.Ui/
+│       ├── bin/
+│       └── obj/
+├── resolutions/
+├── src/
+│   ├── MyProject.Console/
+│   │   └── MyProject.Console.csproj
+│   ├── MyProject.Core/
+│   │   └── MyProject.Core.csproj
+│   ├── MyProject.Ui/
+│   │   └── MyProject.Ui.csproj
+│   ├── tests/
+│   │   └── MyProject.IntegrationTests/
+│   │       └── MyProject.IntegrationTests.csproj
+│   └── MyProject.sln
+├── .gitignore
+├── prototype.md
+└── README.md
+```
+
+| Directory/File | Purpose |
+|----------------|---------|
+| `.claude/` | Claude Code settings and hooks |
+| `escalations/` | Problems CC could not solve, to be picked up by Claude.ai |
+| `howtos/` | Step-by-step instructions, derived from lessons learned |
+| `lessons_learned/` | CC's reports on its own mistakes |
+| `logs/` | Runtime logs |
+| `out/` | Build output; each project has its own subtree |
+| `resolutions/` | Claude.ai answers to escalations, or summaries of spec changes |
+| `src/` | Source code; contains .sln and project folders |
+| `src/MyProject.Core/` | Shared code (compiles to .dll); referenced by Console and Ui |
+| `prototype.md` | Initial intuitions; CC adds Q&A during prototyping phase |
+| `README.md` | Empty except reference to prototype.md or high-level spec |
+
+CC must create all directories explicitly.
+
+Each .csproj must set output paths to keep build artifacts under `out/`. Example for MyProject.Console:
+
+```xml
+<PropertyGroup>
+  <BaseOutputPath>..\..\out\MyProject.Console\bin\</BaseOutputPath>
+  <BaseIntermediateOutputPath>..\..\out\MyProject.Console\obj\</BaseIntermediateOutputPath>
+</PropertyGroup>
+```
+
+---
+
+## 7. Build
+
+### 7.1. Output Rule
+
+All compiler-generated files must be under `out/`. Never mixed with source.
+
+### 7.2. Build Script
+
+Build is done using `build.ps1` in project root.
+
+**Usage:**
+```
+.\build.ps1 -Project <n>
+```
+
+**What it does:**
+- Updates BuildInfo.cs with timestamp
+- Runs `dotnet publish` with required flags
+- Copies exe to project root
+
+`build.ps1` is copied from templates during project bootstrap.
+
+Note: `build.ps1` has a `-Run` flag; running is covered in a later chapter.
+
+### 7.3. Exe Location
+
+Only exes for apps (Console, Ui) are copied to project root. Dlls (Core) and test projects stay in `out/` only.
+
+After building everything:
+```
+my_project/
+├── MyProject.Console.exe
+├── MyProject.Ui.exe
+├── out/
+│   ├── MyProject.Console/...
+│   ├── MyProject.Core/...
+│   ├── MyProject.Ui/...
+│   └── MyProject.IntegrationTests/...
+```
+
+---
+
+## 8. Run
+
+### 8.1. Run Script
+
+Running is done using `run.ps1` in project root.
+
+**Usage:**
+```
+.\run.ps1 -Project <n>
+```
+
+**What it does:**
+- Finds exe in project root
+- Starts the exe
+- Returns PID on success
+- Returns error if it fails (exe missing, missing DLLs, etc.)
+
+`run.ps1` is copied from templates during project bootstrap.
+
+### 8.2. Startup Verification
+
+After starting a process, CC must:
+1. Verify startup via logs
+2. Check logs for any startup errors
+3. If errors found:
+   - Investigate
+   - Discuss with me
+   - Propose a fix
+4. Confirm explicitly that no errors were found in the logs during startup
+
+A process may start (PID exists) but fail internally. Only proceed after confirming logs show successful startup.
+
+### 8.3. Killing Processes
+
+CC can only kill processes CC started, only by PID. If PID was not captured, ask user to stop manually.
+
+---
+
+## 9. Logging
+
+### 9.1. General
+
+All apps must have logging with variable log level.
+
+### 9.2. Location
+
+Logs go to `logs/` subdirectory.
+
+### 9.3. Rotation
+
+On startup, rename existing log to timestamped version. Keep only 3 log files.
+
+If the log file is locked at startup (e.g., user is viewing it), ignore and create a new file.
+
+### 9.4. Format
+
+`[yyyy-MM-dd HH:mm:ss.fff] [LEVEL] Message`
+
+### 9.5. UI Apps
+
+Must have a log panel with the same exact contents as log files.
+
+### 9.6. CLI Apps
+
+Write logs to files only.
+
+---
+
+## Appendix A. App Creation Checklist
+
+CC must go through this checklist explicitly after creating an app.
+
+**Project Structure:**
+- [ ] All directories created: `.claude/`, `escalations/`, `howtos/`, `lessons_learned/`, `logs/`, `out/`, `resolutions/`, `src/`, `src/tests/`
+- [ ] `prototype.md` exists
+- [ ] `README.md` exists with reference to prototype.md
+- [ ] `.gitignore` exists
+
+**Source:**
+- [ ] `.sln` in `src/`
+- [ ] Each app has its own project folder under `src/`
+- [ ] `Core` project exists for shared code
+- [ ] Each `.csproj` has output paths set to `out/`
+
+**Build:**
+- [ ] `build.ps1` in project root
+- [ ] Build succeeds without errors
+- [ ] Exe copied to project root
+
+**Run:**
+- [ ] `run.ps1` in project root
+- [ ] App starts successfully
+- [ ] PID captured
+- [ ] Logs confirm no startup errors
+
+**Logging:**
+- [ ] Logs written to `logs/`
+- [ ] Log format correct: `[yyyy-MM-dd HH:mm:ss.fff] [LEVEL] Message`
+- [ ] UI app: log panel shows same content as log files
+
+**Build Number:**
+- [ ] `BuildInfo.cs` exists with current build number
+- [ ] UI app: build number shown in title bar
+- [ ] CLI app: banner displays build number at startup
+- [ ] CLI app: `--version` flag works
+
+---
+
+## 10. Build Number
+
+### 10.1. Format
+
+`YYYY_MM_DD__HH_mm__NNN`
+
+Example: `2025_12_18__14_30__047`
+
+NNN is a build counter that increments every build (never resets).
+
+### 10.2. Generation
+
+Build number is generated by `build.ps1` and written to `BuildInfo.cs`.
+
+### 10.3. UI Apps
+
+Must show build number in the title bar.
+
+### 10.4. CLI Apps
+
+Must display a banner with build number at startup. Must support `--version` flag.
+
+---
