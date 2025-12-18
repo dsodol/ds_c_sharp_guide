@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+**⚠️ CRITICAL: If a hook denies permission, STOP immediately. Do NOT attempt alternative commands. Report and wait for guidance.**
+
 "r" shortcut means READ CLAUDE.md and follow instructions.
 
 Remember: if the user gave you this shortcut and it is not a beginning of a chat, 
