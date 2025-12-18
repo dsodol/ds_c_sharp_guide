@@ -300,7 +300,7 @@ Must display a banner with build number at startup. Must support `--version` fla
 
 ## Appendix A. App Creation Checklist
 
-CC must state each item by number and explain understanding in its own words.
+CC must quote each item verbatim, then explain understanding in its own words.
 
 **Project Structure:**
 - A.1. All directories created: `.claude/`, `escalations/`, `howtos/`, `lessons_learned/`, `logs/`, `out/`, `resolutions/`, `src/`, `src/tests/`
