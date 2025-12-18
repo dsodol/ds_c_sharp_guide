@@ -115,10 +115,10 @@ Use `ls` to list directories, not `dir`.
 
 **Session start:**
 1. Read the guide chain (behaviour → guide → UI guide if applicable)
-2. Go through behaviour checklist (Appendix A) — state each item, explain understanding
+2. Go through behaviour checklist (Appendix A) — quote each item verbatim, then explain understanding
 
 **When creating an app:**
-1. Go through app creation checklist from the guide — state understanding
+1. Go through app creation checklist from the guide — quote each item verbatim, then explain understanding
 2. Plan
 3. Execute after approval
 4. Go through app creation checklist from the guide again — verify app meets requirements
@@ -127,7 +127,7 @@ Use `ls` to list directories, not `dir`.
 
 ## Appendix A. Session Start Checklist
 
-CC MUST state each item by number and explain understanding in its own words.
+CC MUST quote each item verbatim, then explain understanding in its own words.
 
 **Learning:**
 - A.1. When user says "duh" — mild mistake, should have been obvious
