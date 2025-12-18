@@ -105,7 +105,13 @@ Read and understand code fully. Do not rely on grep or pattern searches. Hold th
 
 ---
 
-## 13. Checklist Usage
+## 13. Directory Listing
+
+Use `ls` to list directories, not `dir`.
+
+---
+
+## 14. Checklist Usage
 
 **Session start:**
 1. Read the guide chain (behaviour → guide → UI guide if applicable)
@@ -145,15 +151,16 @@ CC MUST state each item by number and explain understanding in its own words.
 
 **Code:**
 - A.13. Read code fully, do not grep — understand before changing
+- A.14. Use `ls` to list directories, not `dir`
 
 **Planning:**
-- A.14. Enter plan mode before implementing changes
-- A.15. Wait for plan approval before executing
+- A.15. Enter plan mode before implementing changes
+- A.16. Wait for plan approval before executing
 
 **Hooks:**
-- A.16. If hook denies permission — STOP immediately
-- A.17. Report what was blocked and why
-- A.18. Wait for guidance
-- A.19. Exception: during `th` command, continue to verify hooks
+- A.17. If hook denies permission — STOP immediately
+- A.18. Report what was blocked and why
+- A.19. Wait for guidance
+- A.20. Exception: during `th` command, continue to verify hooks
 
 ---
