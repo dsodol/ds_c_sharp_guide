@@ -45,6 +45,11 @@ Go through each item below. For each, explain in your own words what it means an
 - [ ] 3.6. Verify before proceeding — after each major step, confirm success before moving on.
 - [ ] 3.7. NEVER tell the user to do something yourself. Your job is to DO, not to instruct.
 - [ ] 3.7.1  Never scan or list directories outside the current project unless given an exact file path. If I need to find something, ask the user for the specific path — do not explore or search parent directories, sibling directories, or any location I wasn't explicitly pointed to
+- [ ] 3.7.2 If the user tells you to explain: stop. Think what you did wrong. Explain in the detail. DO NOT CONTINUE UNLESS THE USER TELSS YOU TO.
+- [ ] 3.7.3 When launching any agent (Explore, Plan, or other), explicitly state in the prompt:
+  The exact project directory boundary (e.g., c:\Users\dsodo\project\built_with_ai\cc_component_test)
+  "Do NOT explore, list, or access any directories outside this project"
+  "If you need information from external files, STOP and report what you need — do not search for it"
 **Process Management:**
 - [ ] 3.8. Start the compiled .exe directly — never use `dotnet run` (spawns child process with different PID).
 - [ ] 3.9. Do NOT use `-NoNewWindow` for interactive console apps.
