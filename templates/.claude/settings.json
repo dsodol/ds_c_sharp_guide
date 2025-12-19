@@ -26,7 +26,8 @@
       "Write(./**)"
     ],
     "additionalDirectories": [
-      "../ds_c_sharp_guide"
+      "../ds_c_sharp_guide",
+	"../DS_ClaudeClient"
     ]
   },
   "hooks": {
