@@ -6,7 +6,7 @@ Defines how Claude Code should behave. CC follows this guide unless the user spe
 
 "I" and "me" in this guide refers to the human user.
 
-Read next: `cc_csharp_guide_v2.md`
+Read next: cc_csharp_guide_v3.html
 
 ---
 
